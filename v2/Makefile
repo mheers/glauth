@@ -67,6 +67,8 @@ all: setup binaries verify
 #fast: @ run build process for only linuxamd64
 fast: setup linuxamd64
 
+docker: linuxamd64 releasedockermain
+
 #binaries: @ list of binary formats to build
 binaries: linux386 linuxamd64 linuxarm linuxarm64 darwinamd64 darwinarm64 win386 winamd64
 
@@ -185,10 +187,8 @@ releasedockermain:
 	$(if $(TAG),,$(error Must set TAG))
 	$(if $(REPO),,$(error Must set REPO - glauth or other))
 	@mkdir -p docker/assets/linux/amd64 docker/assets/linux/arm64 docker/assets/linux/arm/v7 && \
-	cp -f bin/glauth-linux-amd64 docker/assets/linux/amd64/glauth && \
-	cp -f bin/glauth-linux-arm64 docker/assets/linux/arm64/glauth && \
-	cp -f bin/glauth-linux-arm-7 docker/assets/linux/arm/v7/glauth && \
-	docker buildx build --tag $$REPO/glauth:$$TAG -t $$REPO/glauth:latest -f docker/Dockerfile-standalone --platform linux/amd64,linux/arm64,linux/arm/v7 --push docker
+	cp -f bin/linuxamd64/glauth docker/assets/linux/amd64/glauth && \
+	docker buildx build --tag $$REPO/glauth:$$TAG -t $$REPO/glauth:latest -f docker/Dockerfile-standalone --platform linux/amd64 --push docker
 
 releasedockerplugins:
 	$(if $(TAG),,$(error Must set TAG))
