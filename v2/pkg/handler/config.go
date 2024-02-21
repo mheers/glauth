@@ -408,7 +408,7 @@ func (h configHandler) getGroupDNs(ctx context.Context, gids []int) []string {
 	for _, gid := range gids {
 		for _, g := range h.cfg.Groups {
 			if g.GIDNumber == gid {
-				dn := fmt.Sprintf("%s=%s,ou=groups,%s", h.backend.GroupFormat, g.Name, h.backend.BaseDN)
+				dn := fmt.Sprintf("%s=%s,ou=users,%s", h.backend.GroupFormat, g.Name, h.backend.BaseDN)
 				groups[dn] = true
 			}
 
