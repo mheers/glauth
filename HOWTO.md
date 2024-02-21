@@ -1,4 +1,4 @@
 ```bash
 cd v2
-REPO=mheers TAG=2.3.2-groups make docker
+REPO=mheers TAG=v2.3.2-groups make docker
 ```
